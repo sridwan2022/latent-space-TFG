@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>&copy; SFU</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+            }
+            header {
+                background-color: aliceblue;
+                padding: 10px;
+            }
+
+            main {
+                margin: 15px;
+            }
+
+            footer {
+                background-color: aliceblue;
+                padding: 10px;
+            }
+
+            .row {
+                display: flex;
+            }
+
+            .column {
+                flex: 1;
+                padding: 10px;
+            }
+
+            p {
+                font-size: large;
+            }
+
+            li {
+                padding: 5px;
+            }
+        </style>
+        <script>
+            function playVideo(vid_link) {
+                var win = window.open(vid_link, '_blank', 'width=570,height=450');
+                win.focus();
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>Latent Space Manipulation for Photo-Realistic Talking Face Generation</h1>
+        </header>
+        <main>
+            <!-- First Section -->
+            <section>
+                <h2>Abstract</h2>
+                <p>
+                    This research focuses on generating photo-realistic talking face videos by leveraging on semantic facial attributes 
+                    in a latent space and capturing the talking style from an old video of a speaker. We formulate a process to manipulate 
+                    facial attributes in the latent space by identifying semantic facial directions. We develop a deep learning 
+                    pipeline to learn the correlation between the audio and the corresponding video frames from a reference video of 
+                    a speaker in an aligned latent space. This correlation is used to navigate a static face image into frames of 
+                    a talking face video, which is moderated by two carefully constructed loss functions, for accurate lip synchronization 
+                    and photo-realistic video reconstruction. By combining these techniques, we aim to generate high-quality talking face 
+                    videos that are visually realistic and synchronized with the provided audio input. Our results were evaluated against 
+                    some state-of-the-art techniques on talking face generation, and we have recorded significant improvements in the image 
+                    quality of the generated talking face video.
+                </p>
+            </section>
+
+            <!-- Second Section -->
+            <section>
+                <div class="row">
+                    <div class="column">
+                        <h2>Static Image</h2>
+                    </div>
+                    <div class="column">
+                        <h2>Description</h2>
+                    </div>
+                    <div class="column">
+                        <h2>Personalized Talking Style</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="column">
+                        <img src="00064.png" alt="" width="256" height="256">
+                    </div>
+                    <div class="column">
+                        <p>
+                            This static image was trained to talk like the reference video on the right.
+                            <br><br>Play the video on the right to see the simulated personalized talking video of the static image.
+                            <br><br>To juxtapose the generated with the original, click 
+                            <a href="javascript:void(0);" onclick="playVideo('video.html?src=output_obama.mp4')">here</a>
+                        </p>
+                    </div>
+                    <div class="column">
+                        <video controls>
+                            <source src="output_2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.   
+                          </video>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="column">
+                        <img src="2daisy_mouthclose_3_01.png" alt="" width="256" height="256">
+                    </div>
+                    <div class="column">
+                        <p>
+                            This static image was trained to talk like the reference video on the right.
+                            <br><br>Play the video on the right to see the simulated personalized talking video of the static image.
+                            <br><br>To juxtapose the generated with the original, click 
+                            <a href="javascript:void(0);" onclick="playVideo('video.html?src=output_daisy.mp4')">here</a>
+                        </p>
+                    </div>
+                    <div class="column">
+                        <video controls>
+                            <source src="daisy.mp4" type="video/mp4">
+                            Your browser does not support the video tag.   
+                          </video>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="column">
+                        <img src="00015.png" alt="" width="256" height="256">
+                    </div>
+                    <div class="column">
+                        <p style="text-align: left;">
+                            Friends, Romans, countrymen, lend me your ears;<br>
+                            I come to bury Caesar, not to praise him.<br>
+                            The evil that men do lives after them;<br>
+                            The good is oft interred with their bones;<br>
+                            So let it be with Caesar. The noble Brutus<br>
+                            Hath told you Caesar was ambitious:<br>
+                            If it were so, it was a grievous fault,<br>
+                            And grievously hath Caesar answer’d it.<br>
+                            Here, under leave of Brutus and the rest–<br>
+                            For Brutus is an honourable man;<br>
+                            So are they all, all honourable men–<br>
+                            Come I to speak in Caesar’s funeral.<br>
+                            He was my friend, faithful and just to me:<br>
+                            But Brutus says he was ambitious;<br>
+                            And Brutus is an honourable man.<br>
+                            He hath brought many captives home to Rome<br>
+                            Whose ransoms did the general coffers fill:<br>
+                            Did this in Caesar seem ambitious?
+                        </p>
+                    </div>
+                    <div class="column">
+                        <video controls>
+                            <source src="shakespeare_pure_00015.mp4" type="video/mp4">
+                            Your browser does not support the video tag.   
+                          </video>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Third Section -->
+            <h2>The Architecture</h2>
+            <p>
+                Our proposed method consists of three encoders that encodes the audio, 
+                image and video inputs into 512-dimensional latent codes respectively. 
+                The latent codes are combined in the latent space and pass to the generator to produce realistic talking face.
+            </p>
+            <div class="row">
+                <div class="column">
+                    <img src="architecture.png" alt="" style="width: auto; height: 400px;">
+                </div>
+                <div class="column">
+                    <p>
+                        Our specific contributions are summarized as follows:
+                    </p>
+                    <ol style="text-align: justify;">
+                        <li>
+                            We formulate an algorithm to get semantic facial attributes in a latent space. 
+                            These attributes could be mouth direction in the latent, such that it can be added to 
+                            any arbitrary latent code (representing a particular face) to give a new latent code 
+                            that will generate the same face with the mouth open or closed based on the magnitude 
+                            of the manipulation.
+                        </li>
+                        <li>
+                            We utilize the old video of a speaker to capture their talking style by learning the correlation 
+                            between their speech segments and visual facial styles in an aligned latent space.
+                        </li>
+                        <li>
+                            We propose an end-to-end deep learning pipeline to detect motion directions from consecutive frames 
+                            of a reference video in the form of motion latent variables, and use the variables to navigate the 
+                            latent code of a static face image into frames of a talking face video.
+                        </li>
+                        <li>
+                            We device two learning schemes that handles accurate lip synchronization using the audio input and 
+                            photo-realistic video reconstruction using the video reference.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>&copy;Saint Francis University, Hong Kong SAR</p>
+        </footer>
+    </body>
+</html>
