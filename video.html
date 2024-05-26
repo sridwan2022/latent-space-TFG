@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div style="display: flex; text-align: center;">
+            <div style="flex: 1;">
+                <h2>Generated</h2>
+            </div>
+            <div style="flex: 1;">
+                <h2>Original</h2>
+            </div>
+        </div>
+        <video controls autoplay id="videoPlayer">
+            Your browser does not support the video tag
+        </video>
+
+        <script>
+            window.addEventListener('load', function() {
+                var urlParams = new URLSearchParams(window.location.search);
+                var videoSrc = urlParams.get('src');
+                var videoPlayer = document.getElementById('videoPlayer');
+                videoPlayer.src = videoSrc;
+                videoPlayer.play();
+            })
+        </script>
+    </body>
+</html>
